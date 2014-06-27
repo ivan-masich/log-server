@@ -3,6 +3,7 @@ package net.masich.logserver.clientlibrary;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.time.LocalDateTime;
 
 public class Logger {
 
@@ -18,8 +19,10 @@ public class Logger {
     }
 
     public void logMessage(String message) {
+        LocalDateTime now = LocalDateTime.now();
+
         try {
-            getOutputWriter().println(message);
+            getOutputWriter().println(now.toString() + " " + message);
         } catch (IOException e) {
             e.printStackTrace();
         }
