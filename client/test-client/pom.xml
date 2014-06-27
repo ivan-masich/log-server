@@ -13,4 +13,12 @@
     <artifactId>test-client</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>net.masich.log-server</groupId>
+            <artifactId>client-library</artifactId>
+            <version>0.1</version>
+        </dependency>
+    </dependencies>
+
 </project>
