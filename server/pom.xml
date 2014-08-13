@@ -10,7 +10,24 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>server</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>server-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>app</module>
+        <module>ui</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

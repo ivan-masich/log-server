@@ -1,4 +1,4 @@
-package net.masich.logserver.clientlibrary;
+package net.masich.logserver.client.library;
 
 import java.io.IOException;
 import java.io.PrintWriter;

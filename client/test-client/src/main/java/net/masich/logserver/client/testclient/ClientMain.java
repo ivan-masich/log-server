@@ -1,8 +1,8 @@
-package net.masich.logserver.testclient;
+package net.masich.logserver.client.testclient;
 
 import java.io.IOException;
 
-import net.masich.logserver.clientlibrary.Logger;
+import net.masich.logserver.client.library.Logger;
 
 public class ClientMain {
 

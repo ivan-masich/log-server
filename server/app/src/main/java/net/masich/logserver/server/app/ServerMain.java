@@ -1,4 +1,4 @@
-package net.masich.logserver.server;
+package net.masich.logserver.server.app;
 
 import java.io.BufferedReader;
 import java.io.IOException;
