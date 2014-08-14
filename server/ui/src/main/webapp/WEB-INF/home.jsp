@@ -4,14 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Log Server</title>
 
-    <link rel="stylesheet" href="resources/css/main.css">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="resources/assets/bootstrap/css/bootstrap.min.css">
-    <script src="resources/assets/jquery-2.1.1.min.js"></script>
-    <script src="resources/assets/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="resources/app/less/main.less" />
+    <script type="text/javascript" src="resources/assets/less/1.7.4/less.js"></script>
+    <script type="text/javascript" src="resources/assets/require-js/2.1.14/require.js" data-main="resources/app/js/main.js"></script>
 </head>
 <body>
     <!-- Fixed navbar -->
