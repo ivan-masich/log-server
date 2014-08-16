@@ -1,4 +1,4 @@
-define(['knockout', 'page/globalActions'], function(ko, globalActions) {
+define(['knockout', 'util/modal'], function(ko, modal) {
     return function signInModel(controller) {
         this.email = ko.observable("");
         this.password = ko.observable("");
@@ -10,7 +10,7 @@ define(['knockout', 'page/globalActions'], function(ko, globalActions) {
             this.error(false);
 
             if (this.email() == "" || this.password() == "") {
-                globalActions.alert("Empty Field", "You need to fill email and password before clicking Sing In.");
+                modal.alert("Empty Field", "You need to fill email and password before clicking Sing In.");
             } else {
                 var model = this;
                 controller.signIn(this.email(), this.password(), function (actionResult) {

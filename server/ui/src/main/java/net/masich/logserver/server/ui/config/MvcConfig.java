@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "net.masich.logserver.server.ui")
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -19,7 +19,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("home");
+        registry.addViewController("/").setViewName("index");
     }
 
     @Override

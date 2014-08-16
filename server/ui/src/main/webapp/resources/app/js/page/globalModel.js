@@ -5,6 +5,7 @@ define(['knockout'], function(ko) {
         alertModalData: {
             title: ko.observable(""),
             content: ko.observable("")
-        }
+        },
+        authorized: ko.observable(false)
     };
 });

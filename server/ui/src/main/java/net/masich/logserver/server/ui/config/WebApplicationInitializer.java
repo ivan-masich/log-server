@@ -2,22 +2,21 @@ package net.masich.logserver.server.ui.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class MyWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class WebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[] { MvcConfig.class, SecurityConfig.class };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] { WebConfig.class };
+        return null;
     }
 
     @Override
     protected String[] getServletMappings() {
         return new String[] { "/" };
     }
-
 
 }

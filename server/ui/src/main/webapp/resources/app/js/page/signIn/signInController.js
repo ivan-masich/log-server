@@ -1,13 +1,15 @@
-define(['jquery', 'page/controllerDispatcher'], function($, controllerDispatcher) {
+define(['jquery', 'util/request'], function($, request) {
     return {
+        controllerDispatcher: null,
         signIn: function(email, password, callback) {
-            $.post('sign-in', {email: email, password: password}, function(resultData) {
+            var controller = this;
+            request.post('sign-in', {email: email, password: password}, function(resultData) {
                 if (!resultData.status) {
                     callback(resultData);
                 } else {
-                    controllerDispatcher.signInCompleted();
+                    controller.controllerDispatcher.signInCompleted();
                 }
-            }, 'json');
+            });
         }
     };
 });
