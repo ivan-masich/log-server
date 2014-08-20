@@ -18,7 +18,7 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">Log Server</a>
                 </div>
-                <!-- ko if: authorized() -->
+                <!-- ko if: user.authorized() -->
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="#"><i class="fa fa-tachometer"></i> Dashboard</a></li>
@@ -36,7 +36,11 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Ivan Masich <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
+                                <span data-bind="text: user.data.name"></span>
+                                <span class="caret"></span>
+                            </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                                 <li><a href="#"><i class="fa fa-sign-out"></i> Sign Out</a></li>
@@ -48,8 +52,8 @@
             </div>
         </div>
 
-        <!-- ko if: pageId() == 'signIn' -->
-        <!-- ko with: pageData -->
+        <!-- ko if: page.id() == 'signIn' -->
+        <!-- ko with: page.data -->
         <div class="container sign-in-container">
             <div class="row">
                 <div class="col-xs-6 col-xs-offset-3">
@@ -81,14 +85,14 @@
         <!-- /ko -->
         <!-- /ko -->
 
-        <!-- ko if: pageId() == 'dashboard' -->
+        <!-- ko if: page.id() == 'dashboard' -->
         <div class="container dashboard">
             <h2>Dashboard</h2>
         </div>
         <!-- /ko -->
 
         <!-- Alert Modal -->
-        <!-- ko with: alertModalData -->
+        <!-- ko with: modal.alert -->
         <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

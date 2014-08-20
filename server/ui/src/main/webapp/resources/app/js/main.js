@@ -12,6 +12,9 @@ requirejs.config({
     }
 });
 
-require(['page/controllerDispatcher', 'bootstrap'], function (controllerDispatcher) {
-    controllerDispatcher.init();
+require(['knockout', 'web/router', 'bootstrap'], function (ko, router) {
+    router.init();
+    ko.applyBindings(router.controller('application').model());
+
+    router.controller('signIn').showSignIn();
 });
