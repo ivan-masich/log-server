@@ -12,9 +12,23 @@ requirejs.config({
     }
 });
 
-require(['knockout', 'web/router', 'bootstrap'], function (ko, router) {
+require([
+    'knockout',
+    'web/router',
+    'util/request',
+    'bootstrap'
+], function (
+    ko,
+    router,
+    request
+) {
     router.init();
     ko.applyBindings(router.controller('application').model());
+    request.addErrorHandler(function(jqXHR){
+        if (jqXHR.status == 401) {
+            router.controller('application').unloadUserInfoAndGoToSignIn();
+        }
+    });
 
-    router.controller('signIn').showSignIn();
+    router.controller('application').loadUserInfoAndGoToHome();
 });

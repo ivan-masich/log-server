@@ -42,8 +42,8 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                                <li><a href="#"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+                                <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>
+                                <li><a href="#" data-bind="click: navigation.signOut"><i class="fa fa-sign-out"></i> Sign Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -58,25 +58,33 @@
             <div class="row">
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Sign In</div>
+                        <div class="panel-heading"><i class="fa fa-sign-in"></i> Sign In</div>
                         <div class="panel-body">
-                            <div data-bind="attr: { class: 'form-group' + (error() ? ' has-error' : '') }" class="form-group">
-                                <label for="inputEmail">Email address</label>
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Enter email"
-                                       data-bind="value: email" />
-                            </div>
-                            <div data-bind="attr: { class: 'form-group' + (error() ? ' has-error' : '') }">
-                                <label for="inputPassword">Password</label>
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Enter password"
-                                       data-bind="value: password">
-                            </div>
-                            <!-- ko if: error() -->
-                            <div class="alert alert-danger" role="alert" data-bind="text: errorMessage"></div>
-                            <!-- /ko -->
-                            <div class="pull-right">
-                                <button type="button" class="btn btn-success"
-                                        data-bind="click: signIn">Sign In</button>
-                            </div>
+                            <form data-bond="submit: signIn">
+                                <div data-bind="css: { 'has-error': error() }" class="form-group">
+                                    <label for="inputEmail">Email address</label>
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter email"
+                                           data-bind="value: email" />
+                                </div>
+                                <div data-bind="attr: { class: 'form-group' + (error() ? ' has-error' : '') }">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" class="form-control" id="inputPassword" placeholder="Enter password"
+                                           data-bind="value: password">
+                                </div>
+                                <!-- ko if: error() -->
+                                <div class="alert alert-danger" role="alert" data-bind="text: errorMessage"></div>
+                                <!-- /ko -->
+                                <div class="pull-right">
+                                    <button type="submit"
+                                            class="btn btn-success"
+                                            data-bind="click: signIn,
+                                                       attr: { disabled: formProcessing() }">
+                                        <i class="fa" data-bind="css: { 'fa-sign-in': !formProcessing(),
+                                                                        'fa-spinner fa-spin': formProcessing()}"></i>
+                                        Sign In
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

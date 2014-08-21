@@ -1,11 +1,19 @@
 define(['util/request'], function(request) {
     return function() {
-        this.updateInfo = function() {
-            this.model().id(1);
-            this.model().name('Ivan Masich');
-            this.model().email('w3cvalid@gmail.com');
+        var controller = this;
 
-            this.router('application').changeUserInfo(true, this.model());
+        this.updateInfo = function(callback) {
+            request.get('user/info', function(data) {
+                controller.model().id(data.id);
+                controller.model().name(data.name);
+                controller.model().email(data.email);
+
+                controller.router('application').changeUserInfo(true, controller.model());
+
+                if (typeof callback != 'undefined') {
+                    callback();
+                }
+            });
         };
     };
 });

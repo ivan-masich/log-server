@@ -2,9 +2,21 @@ define(['util/request'], function(request) {
     return function() {
         var controller = this;
 
+        this.loadUserInfoAndGoToHome = function() {
+            controller.router('user').updateInfo(function() {
+                controller.dashboard();
+            });
+        };
+
+        this.unloadUserInfoAndGoToSignIn = function() {
+            this.changeUserInfo(false, null);
+            this.router('signIn').showSignIn();
+        };
+
         this.signOut = function() {
             request.get('sign-out', function() {
-                this.router('signIn').showSignIn();
+                controller.clearUserInfo();
+                controller.router('signIn').showSignIn();
             });
         };
 

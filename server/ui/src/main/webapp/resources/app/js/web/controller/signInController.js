@@ -6,6 +6,7 @@ define([
         var router = this.router;
 
         this.showSignIn = function() {
+            model.clear();
             router('application').changePage('signIn', model);
         };
 
@@ -15,6 +16,7 @@ define([
             if (model.email() == "" || model.password() == "") {
                 router('application').alert("Empty Field", "You need to fill email and password before clicking Sing In.");
             } else {
+                model.formProcessing(true);
                 request.post(
                     'sign-in',
                     {
@@ -22,12 +24,12 @@ define([
                         password: model.password()
                     },
                     function(resultData) {
+                        model.formProcessing(false);
                         if (!resultData.status) {
                             model.error(true);
                             model.errorMessage(resultData.errorMessage);
                         } else {
-                            router('user').updateInfo();
-                            router('dashboard').showDashboard();
+                            router('application').loadUserInfoAndGoToHome();
                         }
                     }
                 );
