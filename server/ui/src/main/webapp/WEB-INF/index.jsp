@@ -99,6 +99,15 @@
         </div>
         <!-- /ko -->
 
+        <div class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container">
+                <p class="navbar-text">
+                    <a class="navbar-link" href="https://github.com/mind-blowing/log-server" target="_blank"><i class="fa fa-github"></i> Project Home</a>,
+                    <span>Version: 0.1</span>
+                </p>
+            </div>
+        </div>
+
         <!-- Alert Modal -->
         <!-- ko with: modal.alert -->
         <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
