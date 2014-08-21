@@ -15,8 +15,7 @@ define(['util/request'], function(request) {
 
         this.signOut = function() {
             request.get('sign-out', function() {
-                controller.clearUserInfo();
-                controller.router('signIn').showSignIn();
+                controller.unloadUserInfoAndGoToSignIn();
             });
         };
 

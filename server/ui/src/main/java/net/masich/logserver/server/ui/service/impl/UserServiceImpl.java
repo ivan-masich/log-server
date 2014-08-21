@@ -3,7 +3,9 @@ package net.masich.logserver.server.ui.service.impl;
 import net.masich.logserver.server.ui.dao.UserDao;
 import net.masich.logserver.server.ui.dao.entity.User;
 import net.masich.logserver.server.ui.service.UserService;
+import net.masich.logserver.server.ui.service.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,12 +30,21 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User findById(Long id) {
-        return userDao.findById(id);
+        try {
+            return userDao.findById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFound(e);
+        }
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findByEmail(String email) {
-        return userDao.findByEmail(email);
+        try {
+            return userDao.findByEmail(email);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFound(e);
+        }
     }
 
     @Override

@@ -58,11 +58,11 @@
             <div class="row">
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><i class="fa fa-sign-in"></i> Sign In</div>
+                        <div class="panel-heading"><i class="fa fa-user"></i> Sign In</div>
                         <div class="panel-body">
-                            <form data-bond="submit: signIn">
+                            <form method="post" action="" data-bond="submit: signIn">
                                 <div data-bind="css: { 'has-error': error() }" class="form-group">
-                                    <label for="inputEmail">Email address</label>
+                                    <label for="inputEmail">Email</label>
                                     <input type="email" class="form-control" id="inputEmail" placeholder="Enter email"
                                            data-bind="value: email" />
                                 </div>
@@ -108,7 +108,7 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title" id="myModalLabel" data-bind="text: title"></h4>
                     </div>
-                    <div class="modal-body" data-bind="text: content"></div>
+                    <div class="modal-body" data-bind="html: content"></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>

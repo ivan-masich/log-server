@@ -27,6 +27,12 @@ require([
     request.addErrorHandler(function(jqXHR){
         if (jqXHR.status == 401) {
             router.controller('application').unloadUserInfoAndGoToSignIn();
+        } else {
+            router.controller('application').alert('Request Error',
+                    'Url: ' + this.url + '<br />' +
+                    'Method: ' + this.type + '<br />' +
+                    'Status: ' + jqXHR.status + '<br />' +
+                    'Status Text: ' + jqXHR.statusText);
         }
     });
 

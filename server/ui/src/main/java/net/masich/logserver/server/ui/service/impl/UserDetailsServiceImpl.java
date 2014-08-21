@@ -2,7 +2,9 @@ package net.masich.logserver.server.ui.service.impl;
 
 import net.masich.logserver.server.ui.dao.entity.User;
 import net.masich.logserver.server.ui.service.UserService;
+import net.masich.logserver.server.ui.service.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,12 +22,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userService.findByEmail(email);
+        try {
+            User user = userService.findByEmail(email);
 
-        ArrayList<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ADMIN"));
+            ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority("ADMIN"));
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+        } catch (NotFound e) {
+            throw new BadCredentialsException("User was not found, please verify entered credentials.", e);
+        }
     }
 
 }

@@ -24,8 +24,8 @@ define([
                         password: model.password()
                     },
                     function(resultData) {
-                        model.formProcessing(false);
                         if (!resultData.status) {
+                            model.formProcessing(false);
                             model.error(true);
                             model.errorMessage(resultData.errorMessage);
                         } else {
