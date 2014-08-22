@@ -1,11 +1,10 @@
 package net.masich.logserver.server.ui.service.impl;
 
-import net.masich.logserver.server.ui.dao.UserDao;
+import net.masich.logserver.server.ui.dao.UserRepository;
 import net.masich.logserver.server.ui.dao.entity.User;
 import net.masich.logserver.server.ui.service.UserService;
 import net.masich.logserver.server.ui.service.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +15,7 @@ import java.util.Collection;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -24,34 +23,36 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public Collection<User> findAllUsers() {
-        return userDao.findAllUsers();
+        return userRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public User findById(Long id) {
-        try {
-            return userDao.findById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new NotFound(e);
+        User user = userRepository.findOne(id);
+        if (user == null) {
+            throw new NotFound();
         }
+
+        return user;
     }
 
     @Override
     @Transactional(readOnly = true)
     public User findByEmail(String email) {
-        try {
-            return userDao.findByEmail(email);
-        } catch (EmptyResultDataAccessException e) {
-            throw new NotFound(e);
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new NotFound();
         }
+
+        return user;
     }
 
     @Override
     @Transactional
     public User create(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userDao.create(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService {
         if (user.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        return userDao.update(user);
+        return userRepository.save(user);
     }
 
 }

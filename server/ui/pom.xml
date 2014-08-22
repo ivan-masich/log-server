@@ -14,7 +14,7 @@
     <packaging>war</packaging>
 
     <dependencies>
-        <!-- Spring frameworkd -->
+        <!-- Spring framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -39,7 +39,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
         </dependency>
-        <!-- END Spring frameworkd -->
+        <!-- END Spring framework -->
 
         <!-- Spring security -->
         <dependency>
@@ -55,6 +55,13 @@
             <artifactId>spring-security-web</artifactId>
         </dependency>
         <!-- END Spring security -->
+
+        <!-- Spring data -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+        <!-- END Spring data -->
 
         <!-- DB -->
         <dependency>
