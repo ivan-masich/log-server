@@ -3,11 +3,15 @@ requirejs.config({
         baseUrl: './',
         jquery: '../../assets/jquery/2.1.1/jquery',
         bootstrap: '../../assets/bootstrap/3.2.0/js/bootstrap',
-        knockout: '../../assets/knockout/3.1.0/knockout'
+        knockout: '../../assets/knockout/3.1.0/knockout',
+        'knockout.mapping': '../../assets/knockout/plugins/mapping/2.4.1/mapping'
     },
     shim: {
         bootstrap: {
             deps: ['jquery']
+        },
+        'knockout.mapping': {
+            deps: ['knockout']
         }
     }
 });

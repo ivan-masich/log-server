@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface UserService {
 
-    Collection<UserEntity> findAllUsers();
+    Collection<UserEntity> findAll();
     UserEntity findById(Long id);
     UserEntity findByEmail(String email);
     UserEntity create(UserEntity user);

@@ -3,10 +3,12 @@ package net.masich.logserver.server.ui.domain.user.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
+@Table(name = "user")
 public class UserEntity {
 
     @Id
@@ -16,6 +18,7 @@ public class UserEntity {
     private String name;
     private String email;
     private String password;
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -47,5 +50,13 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

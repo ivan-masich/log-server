@@ -7,6 +7,7 @@ public class UserDto {
     private Long id;
     private String name;
     private String email;
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -32,11 +33,20 @@ public class UserDto {
         this.email = email;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public static UserDto valueOf(UserEntity entity) {
         UserDto dto = new UserDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setEmail(entity.getName());
+        dto.setEmail(entity.getEmail());
+        dto.setActive(entity.isActive());
 
         return dto;
     }

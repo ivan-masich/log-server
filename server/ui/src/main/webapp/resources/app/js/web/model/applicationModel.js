@@ -19,10 +19,13 @@ define(['knockout'], function(ko) {
 
         this.navigation = {
             signOut: function() {
-                this.controller().signOut();
+                this.controller().navigation.signOut();
             },
             dashboard: function() {
-                this.controller().showDashboard();
+                this.controller().navigation.dashboard();
+            },
+            users: function() {
+                this.controller().navigation.users();
             }
         };
     };

@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public Collection<UserEntity> findAllUsers() {
+    public Collection<UserEntity> findAll() {
         return userRepository.findAll();
     }
 
@@ -58,9 +58,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserEntity update(UserEntity user) {
+        UserEntity entity = userRepository.findOne(user.getId());
         if (user.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+        } else {
+            user.setPassword(entity.getPassword());
         }
+        user.setActive(entity.isActive());
         return userRepository.save(user);
     }
 

@@ -82,6 +82,17 @@
         </dependency>
         <!-- END DB -->
 
+        <!-- Validation -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <!-- END Validation -->
+
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -96,6 +107,13 @@
             <artifactId>logback-core</artifactId>
         </dependency>
         <!-- END Logging -->
+
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <!-- END Guava -->
 
         <dependency>
             <groupId>javax.servlet</groupId>

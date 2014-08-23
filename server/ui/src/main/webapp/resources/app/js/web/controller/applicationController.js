@@ -2,25 +2,29 @@ define(['util/request'], function(request) {
     return function() {
         var controller = this;
 
+        this.navigation = {
+            signOut: function() {
+                request.get('sign-out', function() {
+                    controller.unloadUserInfoAndGoToSignIn();
+                });
+            },
+            dashboard: function() {
+                controller.router('dashboard').showDashboard();
+            },
+            users: function() {
+                controller.router('user').list();
+            }
+        };
+
         this.loadUserInfoAndGoToHome = function() {
             controller.router('user').updateInfo(function() {
-                controller.dashboard();
+                controller.navigation.dashboard();
             });
         };
 
         this.unloadUserInfoAndGoToSignIn = function() {
-            this.changeUserInfo(false, null);
-            this.router('signIn').showSignIn();
-        };
-
-        this.signOut = function() {
-            request.get('sign-out', function() {
-                controller.unloadUserInfoAndGoToSignIn();
-            });
-        };
-
-        this.dashboard = function() {
-            this.router('dashboard').showDashboard();
+            controller.changeUserInfo(false, null);
+            controller.router('signIn').showSignIn();
         };
 
         this.changePage = function(id, model) {
