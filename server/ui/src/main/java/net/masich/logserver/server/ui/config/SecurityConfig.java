@@ -1,9 +1,9 @@
 package net.masich.logserver.server.ui.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.masich.logserver.server.ui.model.AccessDeniedResponse;
-import net.masich.logserver.server.ui.model.SignInResponse;
-import net.masich.logserver.server.ui.model.SignOutResponse;
+import net.masich.logserver.server.ui.web.security.model.AccessDeniedResponse;
+import net.masich.logserver.server.ui.web.security.model.SignInResponse;
+import net.masich.logserver.server.ui.web.security.model.SignOutResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

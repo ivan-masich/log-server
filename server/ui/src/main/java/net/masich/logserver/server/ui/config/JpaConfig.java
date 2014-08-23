@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "net.masich.logserver.server.ui.dao")
+@EnableJpaRepositories(basePackages = "net.masich.logserver.server.ui.domain")
 @EnableTransactionManagement
 public class JpaConfig {
 
@@ -36,7 +36,7 @@ public class JpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("net.masich.logserver.server.ui.dao.entity");
+        em.setPackagesToScan("net.masich.logserver.server.ui.domain");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

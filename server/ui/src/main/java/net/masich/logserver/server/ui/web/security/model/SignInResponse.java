@@ -1,4 +1,4 @@
-package net.masich.logserver.server.ui.model;
+package net.masich.logserver.server.ui.web.security.model;
 
 public class SignInResponse {
 

@@ -1,8 +1,8 @@
-package net.masich.logserver.server.ui.controller;
+package net.masich.logserver.server.ui.web.user.controller;
 
-import net.masich.logserver.server.ui.dao.entity.User;
-import net.masich.logserver.server.ui.model.UserInfoResponse;
-import net.masich.logserver.server.ui.service.UserService;
+import net.masich.logserver.server.ui.domain.user.entity.UserEntity;
+import net.masich.logserver.server.ui.service.user.UserService;
+import net.masich.logserver.server.ui.web.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,10 +17,10 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/info")
-    public UserInfoResponse info() {
+    public UserDto info() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByEmail(auth.getName());
-        return new UserInfoResponse(user.getId(), user.getName(), user.getEmail());
+        UserEntity user = userService.findByEmail(auth.getName());
+        return UserDto.valueOf(user);
     }
 
 }
