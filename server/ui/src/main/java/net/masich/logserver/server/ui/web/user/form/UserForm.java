@@ -5,6 +5,7 @@ import net.masich.logserver.server.ui.domain.user.entity.UserEntity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+@UniqueEmail(groups = {UserForm.Edit.class, UserForm.Create.class})
 public class UserForm {
 
     @Null(groups = {Create.class})

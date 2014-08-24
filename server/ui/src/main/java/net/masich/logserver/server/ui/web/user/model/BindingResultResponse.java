@@ -1,5 +1,6 @@
 package net.masich.logserver.server.ui.web.user.model;
 
+import org.springframework.context.MessageSource;
 import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class BindingResultResponse {
 
     }
 
-    public static BindingResultResponse valueOf(BindingResult bindingResult) {
+    public static BindingResultResponse valueOf(BindingResult bindingResult, MessageSource messageSource) {
         BindingResultResponse response = new BindingResultResponse();
         response.data = bindingResult.getTarget();
 
@@ -68,7 +69,7 @@ public class BindingResultResponse {
             for (org.springframework.validation.FieldError error : bindingResult.getFieldErrors()) {
                 FieldError fieldError = new FieldError();
                 fieldError.setFieldName(error.getField());
-                fieldError.setMessage(error.getDefaultMessage());
+                fieldError.setMessage(messageSource.getMessage(error.getCode(), null, null));
 
                 response.errors.add(fieldError);
             }

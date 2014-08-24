@@ -10,6 +10,7 @@ import net.masich.logserver.server.ui.web.user.model.DeleteResponse;
 import net.masich.logserver.server.ui.web.user.model.UsersListResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -55,7 +59,7 @@ public class UserController {
 
     @RequestMapping(value = "/new", method = POST)
     public BindingResultResponse create(@Validated({UserForm.Create.class}) UserForm userForm, BindingResult result) {
-        BindingResultResponse response = BindingResultResponse.valueOf(result);
+        BindingResultResponse response = BindingResultResponse.valueOf(result, messageSource);
 
         if (result.hasErrors()) {
             return response;
@@ -69,7 +73,7 @@ public class UserController {
     public BindingResultResponse edit(@Validated({UserForm.Edit.class}) UserForm userForm, BindingResult result,
                                       @PathVariable("id") Long id) {
 
-        BindingResultResponse response = BindingResultResponse.valueOf(result);
+        BindingResultResponse response = BindingResultResponse.valueOf(result, messageSource);
 
         if (result.hasErrors()) {
             return response;
