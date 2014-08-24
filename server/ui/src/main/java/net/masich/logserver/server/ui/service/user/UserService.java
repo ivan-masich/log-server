@@ -11,5 +11,8 @@ public interface UserService {
     UserEntity findByEmail(String email);
     UserEntity create(UserEntity user);
     UserEntity update(UserEntity user);
+    void delete(Long id);
+    UserEntity activate(Long id);
+    UserEntity deactivate(Long id);
 
 }

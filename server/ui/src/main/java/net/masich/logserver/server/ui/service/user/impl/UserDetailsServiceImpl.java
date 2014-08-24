@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             ArrayList<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority("ADMIN"));
 
-            return new User(user.getEmail(), user.getPassword(), authorities);
+            return new User(user.getEmail(), user.getPassword(), user.isActive(), true, true, true, authorities);
         } catch (NotFound e) {
             throw new BadCredentialsException("User was not found, please verify entered credentials.", e);
         }

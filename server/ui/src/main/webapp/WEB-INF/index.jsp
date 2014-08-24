@@ -95,14 +95,30 @@
 
         <!-- ko if: page.id() == 'dashboard' -->
         <div class="container dashboard">
-            <h2>Dashboard</h2>
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <span class="navbar-brand">Dashboard</span>
+                    </div>
+                </div>
+            </nav>
         </div>
         <!-- /ko -->
 
         <!-- ko if: page.id() == 'users' -->
             <!-- ko with: page.data -->
                 <div class="container dashboard">
-                    <h2>Users</h2>
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <span class="navbar-brand">Users</span>
+                            </div>
+                            <div class="navbar-right">
+                                <button type="button" class="btn btn-default navbar-btn"
+                                        data-bind="click: function(){ createUserActionHandler() }">Create User</button>
+                            </div>
+                        </div>
+                    </nav>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -128,9 +144,12 @@
                                             Action <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#" data-bind="click: function() { $parent.editUser($data) }">Edit</a></li>
-                                            <li><a href="#">Activate</a></li>
-                                            <li><a href="#">Delete</a></li>
+                                            <li><a href="#" data-bind="click: function() { $parent.editUserActionHandler($data) }">Edit</a></li>
+                                            <li><a href="#" data-bind="click: function() { $parent.changeStatusActionHandler($data) }">
+                                                <!-- ko if: $parent.users[$data].active() -->Deactivate<!-- /ko -->
+                                                <!-- ko if: !$parent.users[$data].active() -->Activate<!-- /ko -->
+                                            </a></li>
+                                            <li><a href="#" data-bind="click: function() { $parent.deleteUserActionHandler($data) }">Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -138,57 +157,84 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- ko with: editForm -->
-                    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <!-- ko with: userForm -->
+                    <div class="modal fade" id="userFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title">Edit User</h4>
+                                    <h4 class="modal-title">
+                                        <!-- ko if: editMode() -->
+                                            Edit User
+                                        <!-- /ko -->
+                                        <!-- ko if: !editMode() -->
+                                            Create User
+                                        <!-- /ko -->
+                                    </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form role="form" class="form-horizontal">
-                                        <div class="form-group" data-bind="css: { 'has-error': name.error() }">
-                                            <label class="col-sm-2 control-label" for="editUserName">Name</label>
-                                            <div class="col-sm-10">
-                                                <input name="name" type="text" class="form-control" id="editUserName"
-                                                       placeholder="Enter name" data-bind="value: name.value">
-                                                <!-- ko if: name.error() -->
-                                                <span class="help-block" data-bind="text: name.errorMessage"></span>
-                                                <!-- /ko -->
+                                    <!-- ko with: fields -->
+                                        <form role="form" class="form-horizontal">
+                                            <div class="form-group" data-bind="css: { 'has-error': name.error() }">
+                                                <label class="col-sm-2 control-label" for="editUserName">Name</label>
+                                                <div class="col-sm-10">
+                                                    <input name="name" type="text" class="form-control" id="editUserName"
+                                                           placeholder="Enter name" data-bind="value: name.value">
+                                                    <!-- ko if: name.error() -->
+                                                        <span class="help-block" data-bind="text: name.errorMessage"></span>
+                                                    <!-- /ko -->
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group" data-bind="css: { 'has-error': email.error() }">
-                                            <label class="col-sm-2 control-label" for="editUserEmail">Email</label>
-                                            <div class="col-sm-10">
-                                                <input name="email" type="text" class="form-control" id="editUserEmail"
-                                                       placeholder="Enter email" data-bind="value: email.value">
-                                                <!-- ko if: email.error() -->
-                                                <span class="help-block" data-bind="text: email.errorMessage"></span>
-                                                <!-- /ko -->
+                                            <div class="form-group" data-bind="css: { 'has-error': email.error() }">
+                                                <label class="col-sm-2 control-label" for="editUserEmail">Email</label>
+                                                <div class="col-sm-10">
+                                                    <input name="email" type="text" class="form-control" id="editUserEmail"
+                                                           placeholder="Enter email" data-bind="value: email.value">
+                                                    <!-- ko if: email.error() -->
+                                                        <span class="help-block" data-bind="text: email.errorMessage"></span>
+                                                    <!-- /ko -->
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group" data-bind="css: { 'has-error': password.error() }">
-                                            <label class="col-sm-2 control-label" for="editUserPassword">Password</label>
-                                            <div class="col-sm-10">
-                                                <input name="password" type="password" class="form-control" id="editUserPassword"
-                                                       placeholder="Enter Password" data-bind="value: password.value">
-                                                <!-- ko if: password.error() -->
-                                                <span class="help-block" data-bind="text: password.errorMessage"></span>
-                                                <!-- /ko -->
+                                            <div class="form-group" data-bind="css: { 'has-error': password.error() }">
+                                                <label class="col-sm-2 control-label" for="editUserPassword">Password</label>
+                                                <div class="col-sm-10">
+                                                    <input name="password" type="password" class="form-control" id="editUserPassword"
+                                                           placeholder="Enter Password" data-bind="value: password.value">
+                                                    <!-- ko if: password.error() -->
+                                                        <span class="help-block" data-bind="text: password.errorMessage"></span>
+                                                    <!-- /ko -->
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    <!-- /ko -->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                     <button type="button" class="btn btn-success"
-                                            data-bind="click: function(){ save(id.value()) }">Edit</button>
+                                            data-bind="click: function(){ $parent.saveUserActionHandler(id()) }">Save</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 <!-- /ko -->
+                <div class="modal fade" id="deleteUserConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">Delete User Confirmation</h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you really want to delete user?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger"
+                                        data-bind="click: function(){ deleteUserConfirmActionHandler(deleteConfirmationId()) }">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- /ko -->
         <!-- /ko -->
 

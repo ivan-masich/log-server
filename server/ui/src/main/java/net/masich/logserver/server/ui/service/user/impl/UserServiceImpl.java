@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserEntity create(UserEntity user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(true);
         return userRepository.save(user);
     }
 
@@ -59,13 +60,33 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserEntity update(UserEntity user) {
         UserEntity entity = userRepository.findOne(user.getId());
+        entity.setName(user.getName());
+        entity.setEmail(user.getEmail());
         if (user.getPassword() != null) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        } else {
-            user.setPassword(entity.getPassword());
+            entity.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        user.setActive(entity.isActive());
-        return userRepository.save(user);
+        return userRepository.save(entity);
     }
 
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        userRepository.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public UserEntity activate(Long id) {
+        UserEntity entity = userRepository.findOne(id);
+        entity.setActive(true);
+        return userRepository.save(entity);
+    }
+
+    @Override
+    @Transactional
+    public UserEntity deactivate(Long id) {
+        UserEntity entity = userRepository.findOne(id);
+        entity.setActive(false);
+        return userRepository.save(entity);
+    }
 }

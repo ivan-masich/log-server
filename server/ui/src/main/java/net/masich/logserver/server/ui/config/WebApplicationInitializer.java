@@ -1,6 +1,9 @@
 package net.masich.logserver.server.ui.config;
 
+import org.springframework.web.filter.HttpPutFormContentFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 public class WebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -19,4 +22,8 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
         return new String[] { "/" };
     }
 
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[] {new HttpPutFormContentFilter()};
+    }
 }

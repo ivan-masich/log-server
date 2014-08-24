@@ -54,6 +54,9 @@ define(['jquery'], function($) {
         put: function(url, data, successHandler, errorHandler) {
             detectRequestArgumentsAndExecute('PUT', url, data, successHandler, errorHandler);
         },
+        patch: function(url, data, successHandler, errorHandler) {
+            detectRequestArgumentsAndExecute('PATCH', url, data, successHandler, errorHandler);
+        },
         delete: function(url, data, successHandler, errorHandler) {
             detectRequestArgumentsAndExecute('DELETE', url, data, successHandler, errorHandler);
         },

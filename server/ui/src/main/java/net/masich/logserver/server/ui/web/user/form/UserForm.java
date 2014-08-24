@@ -3,9 +3,11 @@ package net.masich.logserver.server.ui.web.user.form;
 import net.masich.logserver.server.ui.domain.user.entity.UserEntity;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 public class UserForm {
 
+    @Null(groups = {Create.class})
     @NotNull(groups = {Edit.class})
     private Long id;
 

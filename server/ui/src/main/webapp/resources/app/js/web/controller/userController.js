@@ -24,9 +24,33 @@ define(['util/request'], function(request) {
         };
 
         this.editUser = function(id, data) {
-            request.post('user/' + id + '/edit', data, function(response) {
-                controller.model().processResponse(id, response);
+            request.put('user/' + id + '/edit', data, function(response) {
+                controller.model().processResponse(response);
             });
-        }
+        };
+
+        this.createUser = function(data) {
+            request.post('user/new', data, function(response) {
+                controller.model().processResponse(response);
+            });
+        };
+
+        this.deleteUser = function(id) {
+            request.delete('user/' + id + '/delete', function(response) {
+                controller.model().processDeleteResponse(response);
+            });
+        };
+
+        this.activateUser = function(id) {
+            request.patch('user/' + id + '/activate', function(response) {
+                controller.model().processChangingStatusResponse(response);
+            });
+        };
+
+        this.deactivateUser = function(id) {
+            request.patch('user/' + id + '/deactivate', function(response) {
+                controller.model().processChangingStatusResponse(response);
+            });
+        };
     };
 });
