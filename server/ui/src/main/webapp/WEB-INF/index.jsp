@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Log Server</title>
 
+    <%--<link rel="stylesheet" type="text/css" href="resources/app/css/main.css" />--%>
     <link rel="stylesheet/less" type="text/css" href="resources/app/less/main.less" />
     <script type="text/javascript" src="resources/assets/less/1.7.4/less.js"></script>
     <script type="text/javascript" src="resources/assets/require-js/2.1.14/require.js" data-main="resources/app/js/main.js"></script>
