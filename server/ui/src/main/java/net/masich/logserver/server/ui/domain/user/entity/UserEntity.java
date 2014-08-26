@@ -59,4 +59,5 @@ public class UserEntity {
     public void setActive(boolean active) {
         this.active = active;
     }
+
 }
