@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery', 'util/is'], function($, is) {
     var errorHandlers = [];
 
     function request(method, url, data, successHandler, errorHandler) {
@@ -25,14 +25,14 @@ define(['jquery'], function($) {
     }
 
     function detectRequestArgumentsAndExecute(method, url, data, successHandler, errorHandler) {
-        if (typeof data == 'undefined') {
+        if (is.undefined(data)) {
             data = null;
             successHandler = null;
             errorHandler = null;
         }
 
-        if (typeof data == 'function') {
-            if (typeof successHandler == 'function') {
+        if (is.function(data)) {
+            if (is.function(successHandler)) {
                 errorHandler = successHandler;
                 successHandler = data;
             } else {
