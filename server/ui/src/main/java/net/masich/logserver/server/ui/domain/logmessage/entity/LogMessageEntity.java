@@ -24,6 +24,9 @@ public class LogMessageEntity {
     @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentLocalDateTime")
     private LocalDateTime timestamp;
 
+    @Column(name = "THREAD_NAME")
+    private String threadName;
+
     @Enumerated
     private LogLevel level;
 
@@ -31,7 +34,6 @@ public class LogMessageEntity {
     private String loggerName;
 
     private String message;
-    private String filename;
     private String classname;
     private String method;
     private Integer line;
@@ -60,6 +62,14 @@ public class LogMessageEntity {
         this.timestamp = timestamp;
     }
 
+    public String getThreadName() {
+        return threadName;
+    }
+
+    public void setThreadName(String threadName) {
+        this.threadName = threadName;
+    }
+
     public LogLevel getLevel() {
         return level;
     }
@@ -82,14 +92,6 @@ public class LogMessageEntity {
 
     public void setLoggerName(String loggerName) {
         this.loggerName = loggerName;
-    }
-
-    public String getFilename() {
-        return filename;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
     }
 
     public String getClassname() {

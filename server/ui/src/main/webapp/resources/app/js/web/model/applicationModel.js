@@ -26,6 +26,9 @@ define(['knockout'], function(ko) {
             },
             users: function() {
                 this.controller().navigation.users();
+            },
+            logMessages: function() {
+                this.controller().navigation.logMessages();
             }
         };
     };

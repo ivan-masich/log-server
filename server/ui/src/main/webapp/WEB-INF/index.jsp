@@ -24,7 +24,8 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="#" data-bind="click: navigation.dashboard"><i class="fa fa-tachometer"></i> Dashboard</a></li>
-                        <li class="dropdown">
+                        <li><a href="#" data-bind="click: navigation.logMessages"><i class="fa fa-file-text"></i> Log Messages</a></li>
+                        <%--<li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file-text"></i> Messages <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#"><i class="fa fa-download"></i> Inbox <span class="badge">14</span></a></li>
@@ -32,7 +33,7 @@
                                 <li class="divider"></li>
                                 <li><a href="#"><i class="fa fa-bookmark"></i> Bookmarks</a></li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li><a href="#"><i class="fa fa-desktop"></i> Applications</a></li>
                         <li><a href="#" data-bind="click: navigation.users"><i class="fa fa-users"></i> Users</a></li>
                     </ul>
@@ -238,6 +239,31 @@
                     </div>
                 </div>
             <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: page.id() == 'logMessages' -->
+            <div class="container dashboard">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <span class="navbar-brand">Log Messages</span>
+                        </div>
+                    </div>
+                </nav>
+                <div class="panel panel-default">
+                    <table class="table table-condensed log-messages">
+                        <tbody data-bind="foreach: page.data.messages">
+                            <tr>
+                                <td class="timestamp" data-bind="text: timestamp"></td>
+                                <td class="thread" data-bind="text: thread"></td>
+                                <td class="level" data-bind="text: level"></td>
+                                <td class="logger" data-bind="text: logger"></td>
+                                <td class="message" data-bind="text: message"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         <!-- /ko -->
 
         <div class="navbar navbar-default navbar-fixed-bottom">
