@@ -1,1 +1,0 @@
-INSERT INTO USER(NAME, EMAIL, PASSWORD) VALUES('Ivan Masich', 'w3cvalid@gmail.com', '$2a$15$Ee8.XsH1Zq.MOhTFkHvPHuPWrv6j3ajk241CuvuLkotNIzgCLG0lS');
