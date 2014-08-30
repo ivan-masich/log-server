@@ -12,7 +12,8 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "net.masich.logserver.server.ui")
+@ComponentScan(basePackages = "net.masich.logserver.server.ui",
+               excludeFilters = @ComponentScan.Filter(value = Configuration.class))
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
