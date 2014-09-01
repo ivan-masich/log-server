@@ -19,6 +19,14 @@
             <artifactId>client-library</artifactId>
             <version>0.1</version>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
