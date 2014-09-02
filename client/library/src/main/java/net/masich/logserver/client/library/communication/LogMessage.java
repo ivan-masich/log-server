@@ -1,6 +1,6 @@
 package net.masich.logserver.client.library.communication;
 
-import java.time.LocalDateTime;
+import org.joda.time.LocalDateTime;
 
 public class LogMessage {
 
