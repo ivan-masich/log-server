@@ -9,6 +9,9 @@ import com.fasterxml.jackson.datatype.joda.JodaModule;
 import net.masich.logserver.client.library.communication.LogMessage;
 import org.joda.time.LocalDateTime;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -17,15 +20,18 @@ public class LogServerAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
     private static final StackTraceElement EMPTY_CALLER_DATA = CallerData.naInstance();
 
     private String host;
-    private String port;
+    private Integer port;
     private String applicationCode;
 
     private String clientInstanceId = UUID.randomUUID().toString();
     private AtomicInteger currentMessageId = new AtomicInteger(0);
 
     private ObjectMapper objectMapper = new ObjectMapper();
+    private Socket socket;
+    private PrintWriter out;
 
-    public LogServerAppender() {
+    @Override
+    public void start() {
         objectMapper.registerModule(new JodaModule());
     }
 
@@ -36,12 +42,13 @@ public class LogServerAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
         LogMessage logMessage = getLogMessage(event);
 
         try {
-            System.out.println(objectMapper.writeValueAsString(logMessage));
+            //TODO Add usage of applicationCode and messageId with previousMessageId.
+            getOutputWriter().write(objectMapper.writeValueAsString(logMessage));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        //TODO Complete other steps like marshalling object to json, sending message to server and so on.
     }
 
     private LogMessage getLogMessage(ILoggingEvent event) {
@@ -75,11 +82,20 @@ public class LogServerAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
         return callerDataArray != null && callerDataArray.length > 0 && callerDataArray[0] != null;
     }
 
+    private PrintWriter getOutputWriter() throws IOException {
+        if (out == null) {
+            socket = new Socket(host, port);
+            out = new PrintWriter(socket.getOutputStream(), true);
+        }
+
+        return out;
+    }
+
     public void setHost(String host) {
         this.host = host;
     }
 
-    public void setPort(String port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 

@@ -1,6 +1,8 @@
 <configuration>
     <appender name="LOG_SERVER" class="net.masich.logserver.client.library.logback.LogServerAppender">
-
+        <host>127.0.0.1</host>
+        <port>9999</port>
+        <applicationCode>test-app</applicationCode>
     </appender>
 
     <root level="debug">
