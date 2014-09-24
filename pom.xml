@@ -15,6 +15,11 @@
     <artifactId>main-parent</artifactId>
     <packaging>pom</packaging>
 
+    <scm>
+        <connection>https://github.com/mind-blowing/log-server.git</connection>
+        <developerConnection>https://github.com/mind-blowing/log-server.git</developerConnection>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.language>java</sonar.language>
