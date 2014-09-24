@@ -11,6 +11,7 @@
         <relativePath>bom</relativePath>
     </parent>
 
+    <name>Log Server</name>
     <artifactId>main-parent</artifactId>
     <packaging>pom</packaging>
 
