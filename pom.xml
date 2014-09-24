@@ -16,8 +16,8 @@
     <packaging>pom</packaging>
 
     <scm>
-        <connection>https://github.com/mind-blowing/log-server.git</connection>
-        <developerConnection>https://github.com/mind-blowing/log-server.git</developerConnection>
+        <connection>scm:git:https://github.com/mind-blowing/log-server.git</connection>
+        <developerConnection>scm:git:https://github.com/mind-blowing/log-server.git</developerConnection>
     </scm>
 
     <properties>
