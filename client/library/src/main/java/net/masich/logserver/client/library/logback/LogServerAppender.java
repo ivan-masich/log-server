@@ -26,8 +26,6 @@ public class LogServerAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
     }
 
     protected void append(ILoggingEvent event) {
-        int messageId = currentMessageId.incrementAndGet();
-
         LogMessage logMessage = LogMessageFactory.fromEvent(event);
 
         //TODO Add usage of applicationCode and messageId with previousMessageId.
