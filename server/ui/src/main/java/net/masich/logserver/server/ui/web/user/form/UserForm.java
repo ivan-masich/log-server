@@ -53,9 +53,6 @@ public class UserForm {
         this.password = password;
     }
 
-    public static interface Create {}
-    public static interface Edit {}
-
     public UserEntity toEntity() {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(id);
@@ -73,6 +70,13 @@ public class UserForm {
         userForm.setEmail(entity.getEmail());
 
         return userForm;
+    }
+
+    public static interface Create {
+
+    }
+    public static interface Edit {
+
     }
 
 }

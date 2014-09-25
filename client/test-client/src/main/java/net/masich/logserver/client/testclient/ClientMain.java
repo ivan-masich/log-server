@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 public class ClientMain {
     private static final Logger LOG = LoggerFactory.getLogger(ClientMain.class);
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws Exception {
         while (true) {
             LOG.debug("Some temporary message.");
             Thread.sleep(1000);

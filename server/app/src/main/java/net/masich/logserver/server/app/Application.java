@@ -6,6 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.core.env.MapPropertySource;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Application {
 
@@ -18,14 +19,14 @@ public class Application {
     public void start() {
         AnnotationConfigApplicationContext ctx  = new AnnotationConfigApplicationContext();
 
-        MapPropertySource config = new MapPropertySource("CliConfig", configAsMap());
-        ctx.getEnvironment().getPropertySources().addFirst(config);
+        MapPropertySource configSource = new MapPropertySource("CliConfig", configAsMap());
+        ctx.getEnvironment().getPropertySources().addFirst(configSource);
         ctx.register(AppConfig.class);
         ctx.refresh();
     }
 
-    private HashMap<String, Object> configAsMap() {
-        HashMap<String, Object> configMap = new HashMap<>();
+    private Map<String, Object> configAsMap() {
+        Map<String, Object> configMap = new HashMap<>();
         configMap.put("config.port", config.getPort());
         configMap.put("config.name", config.getName());
         configMap.put("config.maxConnections", config.getMaxConnections());
